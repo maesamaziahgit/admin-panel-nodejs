@@ -40,3 +40,53 @@ exports.resgistration = function (req, res) {
         }
     })
 }
+
+// controller login
+exports.login = function(req, res) {
+    var post = {
+        password: req.body.password,
+        username: req.body.username
+    }
+
+    var query = "SELECT * FROM ?? WHERE ?? = ? AND ?? = ?";
+    var table = ["emp_login", "password", md5(post.password), "username", post.username];
+
+    query = mysql.format(query, table);
+    connection.query(query, function(error, rows) {
+        if (error) {
+            console.log(error);
+        } else {
+            if (rows.length == 1) {
+                var token = jwt.sign({rows}, jwtKey.secretkey, {
+                    expiresIn: 1440 // 25 menit
+                });
+                id_login = rows[0].id;
+
+                var data = {
+                    id_login: id_login,
+                    token: token,
+                    ip_address: ip.address()
+                }
+
+                var query = "INSERT INTO ?? SET ?";
+                var table = ["emp_token"];
+
+                query = mysql.format(query, table);
+                connection.query(query, data, function(error, rows) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                         res.json({
+                             success: true,
+                             messages: 'token has generated',
+                             token: token,
+                             currUser: data.id_login
+                         });
+                    }
+                });
+            } else {
+                 res.json({"Error": true, "Message": "invalid username or password"});
+            }
+        }
+    });
+}
