@@ -8,6 +8,6 @@ router.post('/api/v1/register', auth.resgistration);
 router.post('/api/v1/login', auth.login);
 
 // authorization
-router.get('/api/v1/adminpage', validate(1), auth.adminpage);
+router.get('/api/v1/adminpage', validate(), auth.adminpage);
 
 module.exports = router;

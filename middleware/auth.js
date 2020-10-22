@@ -92,5 +92,5 @@ exports.login = function(req, res) {
 }
 
 exports.adminpage = function(req, res){
-    response.success("only allow access to admin page");
+    response.success("allow access to admin page", res);
 }

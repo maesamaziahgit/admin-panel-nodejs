@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken');
 const secretkey = require('../config/jwt');
 
-function validate(roles){
-    return function(req, res, next) {
+function validate(){
+    return function(req, rest, next) {
+        var role = req.body.role;
         // authorization header
         var tokenWithBearer = req.headers.authorization;
         if (tokenWithBearer) {
@@ -15,7 +16,7 @@ function validate(roles){
                         message: 'invalid token'
                     });
                 } else {
-                    if (roles==1) {
+                    if (role==1) {
                         req.auth = decoded;
                         next();
                     } else {
