@@ -10,4 +10,8 @@ module.exports = function(app){
         .get(outputjson.selectEmp);
     app.route('/insertEmp')
         .post(outputjson.insertEmp);
+    app.route('/updateEmp')
+        .put(outputjson.updateEmp);
+    app.route('/deleteEmp')
+        .delete(outputjson.deleteEmp);
 };

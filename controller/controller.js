@@ -33,7 +33,42 @@ exports.insertEmp = function (req, res) {
             if (error) {
                 console.log(error);
             } else {
-                response.success('Successfully inserted!', res)
+                response.success('successfully inserted!', res)
+            }
+        }
+    );
+};
+
+exports.updateEmp = function (req, res) {
+    var id = req.body.id;
+    var firstname = req.body.firstname;
+    var lastname = req.body.lastname;
+    var emp_num = req.body.emp_num;
+    var role_id = req.body.role_id;
+    var job_id = req.body.job_id;
+    var address = req.body.address;
+    var city = req.body.city;
+    var zip = req.body.zip;
+    var phonenumber = req.body.phonenumber;
+    connection.query('UPDATE emp SET firstname=?, lastname=?, emp_num=?, role_id=?, job_id=?, address=?, city=?, zip=?, phonenumber=? WHERE id=?', [firstname, lastname, emp_num, role_id, job_id, address, city, zip, phonenumber, id],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.success('successfully updated!', res)
+            }
+        }
+    );
+};
+
+exports.deleteEmp = function (req, res) {
+    var id = req.body.id;
+    connection.query('DELETE FROM emp WHERE id=?', [id],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.success('successfully deleted!', res)
             }
         }
     );
