@@ -8,4 +8,6 @@ module.exports = function(app){
 
     app.route('/selectEmp')
         .get(outputjson.selectEmp);
+    app.route('/insertEmp')
+        .post(outputjson.insertEmp);
 };
