@@ -14,4 +14,12 @@ module.exports = function(app){
         .put(outputjson.updateEmp);
     app.route('/deleteEmp')
         .delete(outputjson.deleteEmp);
+    app.route('/selectOrder')
+        .get(outputjson.selectOrder);
+    app.route('/selectProduct')
+        .get(outputjson.selectProduct);
+    app.route('/selectCustomer')
+        .get(outputjson.selectCustomer);
+    app.route('/selectInvoice')
+        .get(outputjson.selectInvoice);
 };
