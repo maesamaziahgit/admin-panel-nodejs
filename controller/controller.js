@@ -330,3 +330,19 @@ exports.selectEmpGDept = function (req, res) {
             }
         });
 };
+
+exports.selectAccountAdmin = function (req, res) {
+    connection.query(`SELECT el.id,
+                        el.username,
+                        el.role,
+                        DATE_FORMAT(el.creation_date, '%Y-%m-%d') AS creation_date,
+                        DATE_FORMAT(el.update_date, '%Y-%m-%d') AS update_date
+                        FROM fruitazon.emp_login el`,
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.success(rows, res)
+            }
+        });
+};

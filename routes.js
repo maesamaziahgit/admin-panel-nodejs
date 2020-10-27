@@ -38,4 +38,6 @@ module.exports = function(app){
         .get(outputjson.selectEmpJob);
     app.route('/selectEmpGDept')
         .get(outputjson.selectEmpGDept);
+    app.route('/selectAccountAdmin')
+        .get(outputjson.selectAccountAdmin);
 };
