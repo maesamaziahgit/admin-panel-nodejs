@@ -61,6 +61,7 @@ exports.login = function(req, res) {
                     expiresIn: 1440 // 25 menit
                 });
                 id_login = rows[0].id;
+                username = rows[0].username;
 
                 var data = {
                     id_login: id_login,
@@ -80,7 +81,8 @@ exports.login = function(req, res) {
                              success: true,
                              messages: 'token has generated',
                              token: token,
-                             currUser: data.id_login
+                             currUser: data.id_login,
+                             user: username
                          });
                     }
                 });
