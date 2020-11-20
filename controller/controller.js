@@ -334,6 +334,7 @@ exports.selectEmpGDept = function (req, res) {
 exports.selectAccountAdmin = function (req, res) {
     connection.query(`SELECT el.id,
                         el.username,
+                        el.password,
                         el.role,
                         DATE_FORMAT(el.creation_date, '%Y-%m-%d') AS creation_date,
                         DATE_FORMAT(el.update_date, '%Y-%m-%d') AS update_date
@@ -345,4 +346,35 @@ exports.selectAccountAdmin = function (req, res) {
                 response.success(rows, res)
             }
         });
+};
+
+exports.insertUserAdmin = function (req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    var role = req.body.role;
+    connection.query('INSERT INTO emp_login (username, password, role) VALUES (?, ?, ?)', [username, password, role],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.success('successfully inserted!', res)
+            }
+        }
+    );
+};
+
+exports.eidttUserAdmin = function (req, res) {
+    var id = req.body.id;
+    var username = req.body.username;
+    var password = req.body.password;
+    var role = req.body.role;
+    connection.query('UPDATE emp_login SET username=?, password=?, role=? WHERE id=?', [username, password, role, id],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.success('successfully updated!', res)
+            }
+        }
+    );
 };

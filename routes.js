@@ -40,4 +40,8 @@ module.exports = function(app){
         .get(outputjson.selectEmpGDept);
     app.route('/selectAccountAdmin')
         .get(outputjson.selectAccountAdmin);
+    app.route('/insertUserAdmin')
+        .post(outputjson.insertUserAdmin);
+    app.route('/eidttUserAdmin')
+        .put(outputjson.eidttUserAdmin);
 };
